@@ -82,12 +82,12 @@ yarn add -E lodash
 ~~~
 yarn add -D @types/lodash
 ~~~
-11. Instalaciones Iniciales ()
+11. Instalaciones Iniciales Totales(Opcionales)
 ~~~
 yarn add express cors dotenv multer mongoose bcryptjs jsonwebtoken multer rxjs
 ~~~
 ~~~
-yarn add @types/express @types/cors @types/dotenv @types/multer @types/mongoose typescript ts-node  typescript nodemon @types/node @types/multer @types/jsonwebtoken -D 
+yarn add @types/express @types/cors @types/dotenv @types/multer @types/mongoose typescript ts-node  typescript nodemon @types/node @types/multer @types/jsonwebtoken module-alias -D 
 ~~~
 12. Instalaciones Auth ()
 ~~~

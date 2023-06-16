@@ -1,4 +1,5 @@
 import {config} from 'dotenv'
+import {ConstantsUtil} from "../utils/library/constants.util";
 
 // if(process.env.NODE_ENV !== 'production'){
     config();
@@ -6,7 +7,7 @@ import {config} from 'dotenv'
 
 export abstract class Configuration {
 
-    static readonly PORT: string =  process.env.PORT ?? '3000' ;
+    static readonly PORT: string =  process.env.PORT ?? ConstantsUtil.DEFAULT_PORT ;
     static readonly MONGO_URI = process.env.MONGO_URI ?? '';
 
 }

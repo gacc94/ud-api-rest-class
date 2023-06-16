@@ -1,8 +1,11 @@
-import express, {Application} from 'express';
+import express, {Response, Request, Express} from 'express';
 import cors from 'cors';
+import {routes, Routes} from "./routes";
+import router from "./routes/user.routes";
+import userRoutes from "./routes/user.routes";
 
 export class App {
-    private app!: Application;
+    public app: Express;
     private DB_URI: string = '';
 
     public port: string;
@@ -15,6 +18,7 @@ export class App {
 
     private configurationInit(): void {
         this.middlewares();
+        this.routes();
     }
 
     private middlewares(): void {
@@ -23,14 +27,14 @@ export class App {
     }
 
     private routes(): void {
-        this.app.use();
+        const routes = new Routes().getRoutes();
+        this.app.use('/', routes);
+        this.app.use('/user/', userRoutes)
     }
 
     start(): void {
         this.app.listen(this.port, () => {
-            console.log('Server running on http://localhost:3030')
+            console.log(`Server running on http://localhost:${this.port}`)
         });
     }
-
-
 }

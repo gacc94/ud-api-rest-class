@@ -1,6 +1,5 @@
-import {Configuration} from "./app/config/config";
-
 require('module-alias/register') //* Import Module-Alias
+import {Configuration} from "./app/config/config";
 import {App} from './app/app';
 import {DBConnection} from "./app/database/connection";
 

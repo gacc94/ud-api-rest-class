@@ -8,15 +8,7 @@ export class DBConnection {
         this.URI = databaseURI;
     }
 
-    // get uri(): string {
-    //     return this.URI;
-    // }
-    //
-    // set uri(value: string) {
-    //     this.URI = value;
-    // }
-    //
-    public async connectAsync(): Promise<void> {
+     async connectAsync(): Promise<void> {
         try {
             await connect(this.URI, {});
             console.log('Conexión exitosa a la base de datos');
@@ -27,7 +19,7 @@ export class DBConnection {
 
     connectObs(): Observable<any> {
         return new Observable((subscriber) => {
-            connect(this.URI).then((res) => {
+            connect(this.URI, {}).then((res) => {
                 subscriber.next(res);
                 subscriber.complete();
             }).catch((err) => {

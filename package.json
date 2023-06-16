@@ -5,7 +5,8 @@
     "author": "gacc94",
     "license": "MIT",
     "scripts": {
-        "start:dev": "nodemon"
+        "dev": "nodemon",
+        "start": "node ./dist"
     },
     "dependencies": {
         "bcryptjs": "2.4.3",
@@ -33,6 +34,7 @@
     "_moduleAliases": {
         "@utils": "./src/app/utils",
         "@services": "./src/app/services",
-        "@config": "./src/app/config"
+        "@config": "./src/app/config",
+        "@routes": "./src/app/routes"
     }
 }
