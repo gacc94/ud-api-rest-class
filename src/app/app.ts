@@ -1,8 +1,6 @@
 import express, {Response, Request, Express} from 'express';
 import cors from 'cors';
-import {routes, Routes} from "./routes";
-import router from "./routes/user.routes";
-import userRoutes from "./routes/user.routes";
+import {mainRoutes, Routes} from "./routes";
 
 export class App {
     public app: Express;
@@ -27,9 +25,11 @@ export class App {
     }
 
     private routes(): void {
-        const routes = new Routes().getRoutes();
-        this.app.use('/', routes);
-        this.app.use('/user/', userRoutes)
+        // const routes = new Routes().getRoutes();
+        mainRoutes.forEach((route: Routes) => {
+            this.app.use(`/api/v1/${route.path}`, route.router)
+        })
+        // this.app.use('/', routes);
     }
 
     start(): void {

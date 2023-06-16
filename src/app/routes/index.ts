@@ -1,32 +1,25 @@
 import {Router} from "express";
-import UserRoute from './user.routes';
+import {userRouter} from './user.route';
+import {authRouter} from './auth.route';
+import {rolRouter} from "./rols.route";
 
-export class Routes {
-    public router!: Router;
-
-    constructor() {
-        this.router = Router();
-        this.configureRoutes()
-    }
-
-    private configureRoutes() {
-        this.router.get('/user', (req, res, next) => {
-            const headers = req.headers
-            const params = req.params
-            res.status(200).send({headers, params});
-        });
-
-        this.router.get('/auth', (req, res) => {
-            res.send('Es auth').end()
-        })
-    }
-
-    getRoutes(): Router {
-        return this.router;
-    }
-
+export interface Routes {
+    path: string;
+    router: Router;
 }
 
-export const routes = {
-    UserRoute
-}
+export const mainRoutes: Routes[] = [
+    {
+        path: 'auth',
+        router: authRouter,
+    },
+    {
+        path: 'users',
+        router: userRouter
+    },
+    {
+        path: 'rol',
+        router: rolRouter
+    }
+]
+
