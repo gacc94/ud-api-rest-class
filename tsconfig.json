@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES6",
+        "sourceMap": true,
+        "moduleResolution": "Node",
+        "baseUrl": "./src",
+        "outDir": "./dist",
+        "noImplicitAny": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/**/**.ts",
+        "tests/**/**.ts",
+        "playground/**/**.ts"
+    ]
+}
