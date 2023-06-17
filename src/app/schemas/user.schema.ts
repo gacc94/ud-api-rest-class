@@ -11,22 +11,17 @@ import {prop, getModelForClass, modelOptions} from "@typegoose/typegoose";
 export class User {
 
     @prop({
-        required: [true, 'El nombre es obligatorio'],
-        type: String
+        required: [true, 'El nombre es obligatorio'], type: String
     })
     name!: string;
 
     @prop({
-        required: [true, 'El email es obligatorio'],
-        unique: true,
-        trim: true,
-        type: String
+        required: [true, 'El email es obligatorio'], unique: true, trim: true, type: String
     })
     email!: string;
 
     @prop({
-        required: [true, 'La contraseña es obligatorio'],
-        type: String
+        required: [true, 'La contraseña es obligatorio'], type: String
     })
     password!: string;
 
