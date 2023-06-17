@@ -14,7 +14,7 @@ export const getUserByIdSvc = async (id: string) => {
 export const saveUserSvc = async (user: User) => {
     const {email, password} = user;
     const existEmail  = await getUserByEmail(email);
-    if (existEmail) throw new Error('CORREO_REGISTER');
+    if (existEmail) throw new Error('EMAIL_EXIST');
 
     const salt: string = genSaltSync();
     user.password = hashSync(password, salt);
