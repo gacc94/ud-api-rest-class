@@ -13,6 +13,7 @@ db.connectObs().subscribe({
         app.start();
     },
     error: (err) => {
+        console.log('Error connect DB: (MongoDB) ')
         console.log(err);
     }
 })

@@ -1,7 +1,7 @@
 import {Router} from "express";
 import {userRouter} from './user.route';
 import {authRouter} from './auth.route';
-import {rolRouter} from "./rols.route";
+import {roleRouter} from "./role.route";
 
 export interface Routes {
     path: string;
@@ -18,8 +18,8 @@ export const mainRoutes: Routes[] = [
         router: userRouter
     },
     {
-        path: 'rol',
-        router: rolRouter
+        path: 'roles',
+        router: roleRouter
     }
 ]
 

@@ -7,13 +7,20 @@ import {
     updateUserByIdsSvc
 } from "../services/user.service";
 import {User} from "../schemas/user.schema";
+import {Result, ValidationError, validationResult} from "express-validator";
+import {totalUsers} from "../models/user.model";
 
 export abstract class UserController {
 
     static async getUsers(request: Request, response:Response) {
         try {
-            const users = await getUsersSvc();
-            return response.send(users);
+            const {limit, desde} = request.query;
+            const [total, users] = await Promise.all([
+                totalUsers(),
+                getUsersSvc(Number(limit), Number(desde))
+            ]);
+
+            return response.send({total, data: users});
 
 
         } catch (e) {
@@ -35,8 +42,7 @@ export abstract class UserController {
         try {
             const user: User = request.body;
             const newUser = await saveUserSvc(user);
-
-            return response.status(200).send(newUser);
+            return response.status(200).json(newUser);
         } catch (err) {
             console.log((err as Error).message )
             response.status(400).send((err as Error).message);
@@ -70,4 +76,5 @@ export abstract class UserController {
             response.status(400).send((err as Error).message);
         }
     }
+
 }

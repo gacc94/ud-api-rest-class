@@ -1,4 +1,5 @@
-import {prop, getModelForClass, modelOptions} from "@typegoose/typegoose";
+import {prop, modelOptions} from "@typegoose/typegoose";
+import {Role} from "./role.schema";
 
 @modelOptions({
     schemaOptions: {
@@ -25,7 +26,7 @@ export class User {
     })
     password!: string;
 
-    @prop({type: String})
+    @prop({type: [String]})
     img!: string;
 
     @prop({type: String, required: true, enum: ['ADMIN', 'USER']})

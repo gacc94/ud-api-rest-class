@@ -1,12 +1,11 @@
 import {Router} from "express";
 import {UserController} from "../controllers/user.controller";
-import {check} from "express-validator";
-import {isExistEmail, validatorCreate} from "../middlewares/errors-validation";
+import {validateDelete, validateUpdate, validatorCreate} from "../utils/helpers/validators";
 
 export const userRouter = Router();
 
 userRouter.get('/', UserController.getUsers)
     .get('/:id', UserController.getUserById)
-    .post('/', validatorCreate , isExistEmail, UserController.saveUser)
-    .put('/:id', UserController.updateUserById)
-    .delete('/:id', UserController.deleteUserById)
+    .post('/', validatorCreate , UserController.saveUser)
+    .put('/:id', validateUpdate, UserController.updateUserById)
+    .delete('/:id', validateDelete ,UserController.deleteUserById)
