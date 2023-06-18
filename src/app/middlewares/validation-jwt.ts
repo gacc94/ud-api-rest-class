@@ -14,7 +14,6 @@ export const validationJwt = async (request: Request, response: Response, next: 
 
         const payload: IPayload = await verifyJWT(jwt) as IPayload;
         const userDto: IUserDTO = payload.data;
-        console.log(userDto);
         if (isValidRol(userDto.rol, 'ADMIN')) {
             return response.status(403).json({msg: 'FOR_BIDDEN'})
         }

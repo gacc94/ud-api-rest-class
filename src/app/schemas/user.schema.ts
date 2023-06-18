@@ -1,6 +1,6 @@
-import {prop, modelOptions} from "@typegoose/typegoose";
+import {prop, modelOptions, Ref} from "@typegoose/typegoose";
 import {Role} from "./role.schema";
-import * as uu from 'uuid';
+import {v4 } from 'uuid';
 import {nanoid} from "nanoid";
 
 @modelOptions({
@@ -18,7 +18,7 @@ export class User {
     })
     name!: string;
 
-    @prop({required: true, default: () => uu.v4() })
+    @prop({required: true, default: () => v4() })
     sku!: string;
 
     @prop({
@@ -32,10 +32,11 @@ export class User {
     password!: string;
 
     @prop({type: [String]})
-    img!: string;
+    img!: Array<string>;
 
-    @prop({type: String, required: true, enum: ['ADMIN', 'USER']})
-    rol!: string;
+    // @prop({type: String, required: true, enum: ['ADMIN', 'USER']})
+    @prop({ref: () => Role , required: true}) //*Este usuario puede tener 1 o mas roles / Array<Role>
+    roles!: Ref<Role>[];
 
     @prop({type: String, default: true})
     estate!: boolean

@@ -13,3 +13,4 @@ export class Role {
     rol!: string;
 
 }
+

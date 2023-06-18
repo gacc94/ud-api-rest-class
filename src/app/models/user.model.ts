@@ -5,7 +5,7 @@ export const  UserModel =  getModelForClass(User,{});
 
 // export const getUsers = () => UserModel.find({}, {email: true, _id: 0});
 export const getUsers = (limit: number, desde: number) =>
-    UserModel.find({estate: true}).limit(limit).skip(desde);
+    UserModel.find({estate: true}).limit(limit).skip(desde).populate('role');
 export const getUserById = (id: string) => UserModel.findById(id);
 export const saveUser = (user: User)  => UserModel.create(user);
 export const getUserByEmail = (email: string) => UserModel.findOne({email: email});

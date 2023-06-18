@@ -5,7 +5,7 @@ import {validationJwt} from "../middlewares/validation-jwt";
 
 const userRouter = Router();
 
-userRouter.get('/', validationJwt, UserController.getUsers)
+userRouter.get('/', UserController.getUsers)
     .get('/:id', validationJwt, UserController.getUserById)
     .post('/', validatorCreate , UserController.saveUser)
     .put('/:id', validateUpdate, UserController.updateUserById)

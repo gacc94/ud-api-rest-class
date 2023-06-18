@@ -57,7 +57,7 @@ export const validatorCreate: (ValidationChain | any)[] = [
     check('email').custom(isExistEmail),
     check('email', 'Correo invalido').isEmail().not().isEmpty(),
     check('name', 'el nombre es obligatorio').not().isEmpty(),
-    check('rol').custom(isRolValid),
+    // check('rol').custom(isRolValid),
     validationErrors
 ]
 
