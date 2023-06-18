@@ -1,4 +1,4 @@
-import express, {Response, Request, Express} from 'express';
+import express, {Express} from 'express';
 import cors from 'cors';
 import {mainRoutes, Routes} from "./routes";
 
@@ -26,13 +26,13 @@ export class App {
 
     private routes(): void {
         // const routes = new Routes().getRoutes();
-        mainRoutes.forEach((route: Routes) => {
-            this.app.use(`/api/v1/${route.path}`, route.router)
+        mainRoutes.forEach(({path, router}: Routes) => {
+            this.app.use(`/api/v1/${path}`, router)
         })
         // this.app.use('/', routes);
     }
 
-    start(): void {
+    listen(): void {
         this.app.listen(this.port, () => {
             console.log(`Server running on http://localhost:${this.port}`)
         });

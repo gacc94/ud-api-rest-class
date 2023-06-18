@@ -1,10 +1,8 @@
 import {Router} from "express";
+import {AuthController} from "../controllers/auth.controller";
+import {validateSignIn} from "../utils/helpers/validators";
 
 export const authRouter = Router();
 
-authRouter.get('/', (req, res) => {
-    res.send({message: 'Soy auth sin ID'})
-})
-    .get('/:id', (req, res) => {
-        res.send({message: 'Soy auth con ID'})
-    });
+authRouter.post('/sign-in', validateSignIn, AuthController.signIn)
+    .post('/sign-up', AuthController.signUp);

@@ -7,7 +7,6 @@ import {
     updateUserByIdsSvc
 } from "../services/user.service";
 import {User} from "../schemas/user.schema";
-import {Result, ValidationError, validationResult} from "express-validator";
 import {totalUsers} from "../models/user.model";
 
 export abstract class UserController {
@@ -20,9 +19,7 @@ export abstract class UserController {
                 getUsersSvc(Number(limit), Number(desde))
             ]);
 
-            return response.send({total, data: users});
-
-
+            return response.status(200).json({total, data: users});
         } catch (e) {
             response.status(400).send('Error');
         }
@@ -32,7 +29,7 @@ export abstract class UserController {
         try {
             const {id} = request.params
             const user = await getUserByIdSvc(id);
-            response.send(user);
+            response.status(200).json(user);
         } catch (e) {
             response.status(400).send('Error');
         }

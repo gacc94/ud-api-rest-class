@@ -1,5 +1,7 @@
 import {prop, modelOptions} from "@typegoose/typegoose";
 import {Role} from "./role.schema";
+import * as uu from 'uuid';
+import {nanoid} from "nanoid";
 
 @modelOptions({
     schemaOptions: {
@@ -15,6 +17,9 @@ export class User {
         required: [true, 'El nombre es obligatorio'], type: String
     })
     name!: string;
+
+    @prop({required: true, default: () => uu.v4() })
+    sku!: string;
 
     @prop({
         required: [true, 'El email es obligatorio'], unique: true, trim: true, type: String
@@ -33,7 +38,7 @@ export class User {
     rol!: string;
 
     @prop({type: String, default: true})
-    estate!: string
+    estate!: boolean
 
     @prop({type: Boolean, default: false})
     google!: boolean;

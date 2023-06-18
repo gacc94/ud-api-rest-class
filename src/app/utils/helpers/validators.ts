@@ -1,8 +1,9 @@
 import {NextFunction, Request, Response} from "express";
 import {check, Result, ValidationChain, ValidationError, validationResult} from "express-validator";
-import {Role} from "../../schemas/role.schema";
 import {RoleModel} from "../../models/role.model";
-import {getUserByEmail, getUserById, UserModel} from "../../models/user.model";
+import {getUserByEmail, getUserById, } from "../../models/user.model";
+import {compare} from 'bcryptjs'
+import {errors} from "@typegoose/typegoose";
 
 export const validatorsCreate = (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -30,9 +31,27 @@ export const isRolValid = async (rol: any) => {
 
 export const validationErrors = async (request: Request, response: Response, next: NextFunction) => {
     const errors: Result<ValidationError> = validationResult(request);
+    console.log(!errors.isEmpty());
     if (!errors.isEmpty()) return response.status(400).json(errors);
     return next();
 }
+
+export const validationBcryptPassword = async (request: Request, response: Response, next: NextFunction) => {
+    const {email, password} = request.body;
+    const user = await getUserByEmail(email);
+    if (!user) return response.sendStatus(400)
+    const isValidPassword = await compare(password, user.password );
+    if (!isValidPassword)  return response.status(400).json('Errror')
+    return next();
+}
+
+export const validateSignIn: Array<(ValidationChain | any)> = [
+    check('email', 'email is required').not().isEmpty(),
+    check('email', 'email invalid').isEmail(),
+    check('password').not().isEmpty(),
+    validationBcryptPassword,
+    validationErrors,
+]
 
 export const validatorCreate: (ValidationChain | any)[] = [
     check('email').custom(isExistEmail),
