@@ -1,6 +1,4 @@
 import {Request, Response} from "express";
-import * as jw from 'jsonwebtoken';
-import {generateJWT} from "../utils/helpers/jwt.handle";
 import {AuthService} from "../services/auth.service";
 
 export abstract class AuthController {

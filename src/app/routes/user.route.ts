@@ -3,10 +3,12 @@ import {UserController} from "../controllers/user.controller";
 import {validateDelete, validateUpdate, validatorCreate} from "../utils/helpers/validators";
 import {validationJwt} from "../middlewares/validation-jwt";
 
-export const userRouter = Router();
+const userRouter = Router();
 
 userRouter.get('/', validationJwt, UserController.getUsers)
     .get('/:id', validationJwt, UserController.getUserById)
     .post('/', validatorCreate , UserController.saveUser)
     .put('/:id', validateUpdate, UserController.updateUserById)
     .delete('/:id', validateDelete ,UserController.deleteUserById)
+
+export default userRouter;

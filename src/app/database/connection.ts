@@ -1,11 +1,12 @@
 import {connect} from 'mongoose';
 import {Observable} from "rxjs";
+import {Configuration} from "../config/config";
 
 export class DBConnection {
     public URI: string;
 
-    constructor(databaseURI: string) {
-        this.URI = databaseURI;
+    constructor() {
+        this.URI = Configuration.MONGO_URI;
     }
 
      async connectAsync(): Promise<void> {
@@ -29,3 +30,5 @@ export class DBConnection {
     }
 
 }
+
+export default new DBConnection()

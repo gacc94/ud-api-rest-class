@@ -1,15 +1,15 @@
 require('module-alias/register') //* Import Module-Alias
 import {Configuration} from "./app/config/config";
-import {App} from './app/app';
-import {DBConnection} from "./app/database/connection";
+import app, {App} from './app/app';
+import database, {DBConnection} from "./app/database/connection";
 
 class Server {
     public app: App;
     public db: DBConnection;
 
     constructor() {
-        this.db = new DBConnection(Configuration.MONGO_URI);
-        this.app = new App(Configuration.PORT);
+        this.db = database;
+        this.app = app;
     }
 
     start() {

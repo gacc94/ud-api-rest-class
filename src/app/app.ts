@@ -1,16 +1,16 @@
 import express, {Express} from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import {mainRoutes, Routes} from "./routes";
+import {Configuration} from "./config/config";
 
 export class App {
     public app: Express;
-    private DB_URI: string = '';
-
     public port: string;
 
-    constructor(port: string) {
+    constructor() {
         this.app = express();
-        this.port = port;
+        this.port = Configuration.PORT;
         this.configurationInit()
     }
 
@@ -20,7 +20,9 @@ export class App {
     }
 
     private middlewares(): void {
+        this.app.set('port', this.port);
         this.app.use(cors());
+        this.app.use(morgan('dev')); //*IDEAL EN DEV
         this.app.use(express.json());
     }
 
@@ -33,8 +35,10 @@ export class App {
     }
 
     listen(): void {
-        this.app.listen(this.port, () => {
+        this.app.listen(this.app.get('port'), () => {
             console.log(`Server running on http://localhost:${this.port}`)
         });
     }
 }
+
+export default new App();
